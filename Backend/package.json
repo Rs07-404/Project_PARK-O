@@ -2,9 +2,9 @@
   "name": "parkoapi",
   "version": "1.0.0",
   "description": "api for parko application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node server.js"
   },
   "type": "module",
   "author": "parko",
