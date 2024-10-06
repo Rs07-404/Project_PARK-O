@@ -1,0 +1,12 @@
+{
+  "name": "parkoapi",
+  "version": "1.0.0",
+  "description": "api for parko application",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "type": "module",
+  "author": "parko",
+  "license": "ISC"
+}
