@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js"
+import reservationRoutes from "./routes/reservations.route.js"
+import vehicleRoutes from "./routes/vehicle.route.js"
 import connectToMongoDB from "./db/connectdb.js";
 
 dotenv.config();
@@ -13,6 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/reservation", reservationRoutes);
+app.use("/api/vehicle", vehicleRoutes);
 
 app.listen(PORT, async() => {
     await connectToMongoDB();

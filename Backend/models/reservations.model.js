@@ -11,6 +11,11 @@ const reservationSchema = new mongoose.Schema({
         ref: 'ParkingSpot',
         required: true,
     },
+    vehicleId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Vehicle',
+        required: true,
+    },
     startTime: {
         type: Date,
         required: true,
@@ -21,7 +26,7 @@ const reservationSchema = new mongoose.Schema({
     },
     status:{
         type: String,
-        enum: ['confirmed','completed','canceled'],
+        enum: ['confirmed','parked','completed','canceled'],
         default: 'confirmed',
     },
 }, {timestamps: true});
