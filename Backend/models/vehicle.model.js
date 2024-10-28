@@ -14,10 +14,6 @@ const vehicleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    rfid: {
-        type: String,
-        required: true,
-    },
     numberPlate:{
         type: String,
         required: true,

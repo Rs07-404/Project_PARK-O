@@ -1,5 +1,6 @@
 import ParkingSpot from "../models/parkingSpot.model.js";
 import Reservation from "../models/reservation.model.js";
+import User from "../models/user.model.js";
 import Vehicle from "../models/vehicle.model.js";
 
 export const createReservation = async (req, res) => {
@@ -21,15 +22,26 @@ export const createReservation = async (req, res) => {
             return res.status(400).json({ error: "Parking spot is currently occupied" });
         }
 
+        // Find the user
+        const user = await User.findById(req.user._id);
+
         // Creating the reservation
-        const reservation = new Reservation({
-            userId: req.user._id,
-            parkingSpotId: parkingSpot._id,
-            vehicleId: vehicle._id,
-            startTime,
-            endTime,
-            status: "confirmed"
-        });
+        if (user){
+            const reservation = new Reservation({
+                userId: req.user._id,
+                parkingSpotId: parkingSpot._id,
+                vehicleId: vehicle._id,
+                startTime,
+                endTime,
+                status: "confirmed"
+            });
+
+            if(reservation){
+                user.reservations.push(reservation._id);
+            }
+
+            await Promise.all([reservation.save(), user.save()]);
+        }
 
         await reservation.save();
 
