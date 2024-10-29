@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import signUser from "../utils/tokenWorks.js";
+import generateQRCode from "../utils/qrcodeworks.js";
 
 export const signup = async (req, res) =>{
     try{
@@ -33,12 +34,17 @@ export const signup = async (req, res) =>{
             phone,
             gender,
             // profilePic: gender === "male" ? boyProfilePic : girlProfilePic
-        })
+        });
 
         // If user created save user to db
         if(newUser){
             signUser(newUser._id, res);
-
+            
+            const qrData = {
+                userId: newUser._id,
+            }
+            const qrcode = generateQRCode(qrData);
+            newUser.qrcode = qrcode;
             await newUser.save();
             res.status(201).json({
                 _id: newUser._id,

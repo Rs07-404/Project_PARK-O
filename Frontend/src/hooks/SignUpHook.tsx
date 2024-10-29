@@ -7,8 +7,8 @@ const useSignUp = () => {
     const [loading, setLoading] = useState(false);
     const { setAuthUser } = useAuthContext();
 
-    const signUp = async({fullName, username, password, confirmPassword, gender}) => {
-        const success = handleInputErrors({fullName, username, password, confirmPassword, gender});
+    const signUp = async({fullName, email, phone, password, confirmPassword, gender}) => {
+        const success = handleInputErrors({fullName, email, phone, password, confirmPassword, gender});
         if (!success) return;
 
         setLoading(true);
@@ -17,7 +17,7 @@ const useSignUp = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    fullName, username, password, confirmPassword, gender
+                    fullName, email, password, confirmPassword, gender
                 })
             })
             const data = await response.json();
@@ -37,8 +37,8 @@ const useSignUp = () => {
     return { loading, signUp }
 }
 
-const handleInputErrors = ({fullName, username, password, confirmPassword, gender}) => {
-    if(!fullName || !username || !password || !confirmPassword || !gender){
+const handleInputErrors = ({fullName, email, phone, password, confirmPassword, gender}) => {
+    if(!fullName || !email || !phone || !password || !confirmPassword || !gender){
         toast.error('Please fill in all fields');
         return false;
     }

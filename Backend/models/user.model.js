@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
         res: 'Reservation',
         default: [],
     }],
+    qrcode: {
+        type: qrcode,
+        default: '',
+    }
 }, { timestamps: true});
 
 const User = mongoose.model("User", userSchema);

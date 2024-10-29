@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/LoginHook";
+import { useAppContext } from "../../context/AppContext";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -8,6 +9,7 @@ const Login = () => {
     password: "",
   });
 
+  const { screenWidth } = useAppContext();
   const { loading, login } = useLogin();
 
   const changeHandler = (e) => {
@@ -20,13 +22,20 @@ const Login = () => {
   };
   return (
     <div className="chatBox">
-      <div className="headText">
-        Login{" "}
+      {screenWidth > 850 && <div className="headText">
         <div className="brand">
-          Park- <div className="color-red">O</div>
+          <div>Park-</div> <div className="color-red">O</div>
         </div>
-      </div>
+      </div>}
       <div className="loginBox">
+        <div className="headText">
+          Login {" "}
+          {screenWidth < 850 &&
+            <div className="brand">
+              <div>Park-</div>
+              <div className="color-red">O</div>
+            </div>}
+        </div>
         <form onSubmit={handleSubmit} className="loginForm">
           <div>
             <label className="label">Username</label>
@@ -52,11 +61,11 @@ const Login = () => {
           </div>
           <div>
             <button className="btn">{!loading ? "Login" : "Loading"}</button>
-            <div>
-              <Link to={"/signup"} className="link">
-                Don't have an account ?
-              </Link>
-            </div>
+            {/* <div> */}
+            <Link to={"/signup"} className="link">
+              Don't have an account ?
+            </Link>
+            {/* </div> */}
           </div>
         </form>
       </div>

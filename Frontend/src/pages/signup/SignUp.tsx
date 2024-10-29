@@ -28,13 +28,20 @@ const SignUp = () => {
 
   return (
     <div className="chatBox">
-      <div className={screenWidth < 850 ? "disabled" : "headText"}>
-        Sign Up{" "}
+      {screenWidth > 850 && <div className="headText">
         <div className="brand">
-          Park- <div className="color-red">O</div>
+          <div>Park-</div> <div className="color-red">O</div>
         </div>
-      </div>
+      </div>}
       <div className="loginBox">
+        <div className="headText">
+          Sign Up {" "}
+          {screenWidth < 850 &&
+            <div className="brand">
+              <div>Park-</div>
+              <div className="color-red">O</div>
+            </div>}
+        </div>
         <form className="signupForm" onSubmit={handleSubmit}>
           <div>
             <label className="label">Full Name</label>
