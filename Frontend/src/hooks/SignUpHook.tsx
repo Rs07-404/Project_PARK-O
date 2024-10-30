@@ -17,7 +17,7 @@ const useSignUp = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    fullName, email, password, confirmPassword, gender
+                    fullName, email, phone, password, confirmPassword, gender
                 })
             })
             const data = await response.json();
@@ -25,7 +25,7 @@ const useSignUp = () => {
                 throw new Error(data.error);
             }
 
-            localStorage.setItem('chat-user', JSON.stringify(data));
+            localStorage.setItem('user', JSON.stringify(data));
             setAuthUser(data);
 
         } catch (error:any) {

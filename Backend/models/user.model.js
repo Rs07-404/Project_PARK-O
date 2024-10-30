@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         default: [],
     }],
     qrcode: {
-        type: qrcode,
+        type: String,
         default: '',
     }
 }, { timestamps: true});

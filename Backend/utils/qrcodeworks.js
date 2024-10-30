@@ -4,7 +4,7 @@ import QRCode from 'qrcode';
 
 const generateQRCode = async (jsonData) => {
     try {
-        const secretKey = 'your-secret-key';
+        const secretKey = process.env.AES_SECRET;
         const iv = crypto.randomBytes(16);
 
         const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(secretKey, 'utf-8'), iv);

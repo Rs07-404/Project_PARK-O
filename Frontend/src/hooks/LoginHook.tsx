@@ -25,7 +25,7 @@ const useLogin = () => {
                 throw new Error(data.error);
             }
 
-            localStorage.setItem('chat-user', JSON.stringify(data));
+            localStorage.setItem('user', JSON.stringify(data));
             setAuthUser(data);
 
         } catch (error:any) {

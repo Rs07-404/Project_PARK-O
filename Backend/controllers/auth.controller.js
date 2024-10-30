@@ -43,14 +43,14 @@ export const signup = async (req, res) =>{
             const qrData = {
                 userId: newUser._id,
             }
-            const qrcode = generateQRCode(qrData);
+            const qrcode = await generateQRCode(qrData);
             newUser.qrcode = qrcode;
             await newUser.save();
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
-                // profilePic: newUser.profilePic,
+                qrcode: newUser.qrcode
             });
         }else{
             res.status(400).json({error: "Invalid user data"});
@@ -80,7 +80,7 @@ export const login = async (req, res) =>{
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
-            // profilePic: user.profilePic,
+            qrcode: user.qrcode
         })
 
     }catch(error){
