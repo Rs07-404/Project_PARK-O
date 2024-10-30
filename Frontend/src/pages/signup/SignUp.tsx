@@ -27,7 +27,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="chatBox">
+    <div className="canvas">
       {screenWidth > 850 && <div className="headText">
         <div className="brand">
           <div>Park-</div> <div className="color-red">O</div>

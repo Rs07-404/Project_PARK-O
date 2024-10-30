@@ -5,7 +5,7 @@ import { useAppContext } from "../../context/AppContext";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -21,7 +21,7 @@ const Login = () => {
     await login(inputs);
   };
   return (
-    <div className="chatBox">
+    <div className="canvas">
       {screenWidth > 850 && <div className="headText">
         <div className="brand">
           <div>Park-</div> <div className="color-red">O</div>
@@ -38,13 +38,13 @@ const Login = () => {
         </div>
         <form onSubmit={handleSubmit} className="loginForm">
           <div>
-            <label className="label">Username</label>
+            <label className="label">Email</label>
             <input
-              type="text"
-              name="username"
-              placeholder="Enter Username"
+              type="email"
+              name="email"
+              placeholder="Enter Email"
               className="inputForm"
-              value={inputs.username}
+              value={inputs.email}
               onChange={changeHandler}
             />
           </div>

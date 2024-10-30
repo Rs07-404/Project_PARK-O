@@ -9,7 +9,7 @@ const Home = () => {
   const { screenWidth } = useAppContext();
 
   return (
-    <div className="chatBox">
+    <div className="canvasHome">
       Home
       {/* <AddConversation />
                 {screenWidth <= 850 && !selectedConversation &&<SideBar />}

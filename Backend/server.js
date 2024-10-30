@@ -19,8 +19,6 @@ app.use("/api/reservation", reservationRoutes);
 app.use("/api/vehicle", vehicleRoutes);
 import crypto from 'crypto';
 app.listen(PORT, async() => {
-    const secretKey = crypto.createHash('sha256').update(process.env.AES_SECRET).digest('base64').slice(0, 32);
-    console.log(secretKey);
     await connectToMongoDB();
     console.log(`Server running on port ${PORT}`);
 })
