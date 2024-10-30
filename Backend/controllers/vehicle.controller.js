@@ -1,17 +1,29 @@
+import User from "../models/user.model.js";
 import Vehicle from "../models/vehicle.model.js";
 
 export const addVehicle = async (req, res) => {
     try {
-        const { name, model, rfid, numberPlate } = req.body;
+        const { name, model, numberPlate } = req.body;
 
-        // Create a new vehicle
-        const newVehicle = new Vehicle({
-            userId: req.user._id,
-            name,
-            model,
-            rfid,
-            numberPlate,
-        });
+        const user = User.findById(req.user._id);
+
+        if(user){
+            // Create a new vehicle
+            const newVehicle = new Vehicle({
+                userId: req.user._id,
+                name,
+                model,
+                numberPlate,
+            });
+
+            if(newVehicle){
+                user.vehicles.push(newVehicle._id);
+                await Promise.all([user.save(), newVehicle.save()]);
+            }else{
+                res.status(400).json({ error: "Failed to add vehicle. Please try again" });
+            }
+        }
+
 
         await newVehicle.save();
 

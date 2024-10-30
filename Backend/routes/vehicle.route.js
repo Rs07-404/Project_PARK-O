@@ -1,6 +1,6 @@
 import express from "express";
-import authoriseUser from "../middlewares/authoriseUser";
-import { addVehicle, removeVehicle } from "../controllers/vehicle.controller";
+import authoriseUser from "../middlewares/authoriseUser.js";
+import { addVehicle, removeVehicle } from "../controllers/vehicle.controller.js";
 
 const router = express.Router();
 

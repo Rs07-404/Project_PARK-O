@@ -1,6 +1,6 @@
 import express from "express";
-import { createReservation, verifyParkedVehicle } from "../controllers/reservation.controller";
-import authoriseUser from "../middlewares/authoriseUser";
+import { createReservation, verifyParkedVehicle } from "../controllers/reservation.controller.js";
+import authoriseUser from "../middlewares/authoriseUser.js";
 
 const router = express.Router();
 
