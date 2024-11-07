@@ -1,21 +1,26 @@
-// import AddConversation from "../../components/AddConversationBox/AddConversationBox.tsx";
-// import { MessageContainer } from "../../components/MessageContainer/MessageContainer.tsx";
-// import SideBar from "../../components/SideBar/SideBar.tsx";
+import { useEffect, useState } from "react";
+import Header from "../../components/Header/Header.tsx";
+import ParkingMap from "../../components/Map/Map.tsx";
 import { useAppContext } from "../../context/AppContext.tsx";
-// import useConversation from "../../zustand/useConversation.ts";
+// import { useAuthContext } from "../../context/AuthContext.tsx";
+import { ParkingSpot } from "../../types/ParkingSpot.type.ts";
+import useParkingSpot from "../../hooks/ParkingSpotHook.tsx";
 
 const Home = () => {
-  //   const { selectedConversation } = useConversation();
-  const { screenWidth } = useAppContext();
+  const { parkingSpots } = useAppContext();
+  // const { authUser } = useAuthContext();
+  const { loading, fetchParkingSpots } = useParkingSpot();
+
+  useEffect(() => {
+    fetchParkingSpots();
+  },[])
+
 
   return (
     <div className="canvasHome">
-      Home
-      {/* <AddConversation />
-                {screenWidth <= 850 && !selectedConversation &&<SideBar />}
-                {screenWidth > 850 && <SideBar />}
-                {screenWidth <= 850 && selectedConversation &&<MessageContainer />}
-                {screenWidth > 850 && <MessageContainer />} */}
+      <Header />
+      <ParkingMap parkingSpots={parkingSpots} />
+      {/* { authUser?.qrcode && <svg dangerouslySetInnerHTML={{__html: authUser.qrcode}} />} */}
     </div>
   );
 };

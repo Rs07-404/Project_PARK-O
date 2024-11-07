@@ -57,11 +57,44 @@ body {
 
 .canvasHome{
   display: flex;
+  flex-direction: column;
   flex: 100%;
   background-color: rgba(255, 255, 255, 0.8);
   height: 100%;
   animation: pop 1s;
   box-sizing: border-box;
+}
+
+.header{
+  display: flex;
+  height: 8vh;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 2px 4px 8px grey;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.header .brand{
+  justify-content: flex-start;
+  flex: 50%;
+  padding: 0;
+}
+
+.logoutButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.header .profile{
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .signupForm {

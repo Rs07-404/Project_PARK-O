@@ -6,13 +6,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { ParkingSpot } from "../types/ParkingSpot.type";
 
 export const AppContext = createContext<
   | {
       screenWidth: number;
       setScreenWidth: React.Dispatch<SetStateAction<number>>;
-      showAddConversationBox: boolean | null;
-      setShowAddConversationBox: React.Dispatch<SetStateAction<boolean>>;
+      parkingSpots: ParkingSpot[] | [] | null;
+      setParkingSpots: React.Dispatch<SetStateAction<ParkingSpot[] | [] | null>>;
     }
   | undefined
 >(undefined);
@@ -26,9 +27,9 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [showAddConversationBox, setShowAddConversationBox] =
-    useState<boolean>(false);
+
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const [parkingSpots, setParkingSpots] = useState<ParkingSpot[] | [] | null>([]);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -49,8 +50,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         screenWidth,
         setScreenWidth,
-        showAddConversationBox,
-        setShowAddConversationBox,
+        parkingSpots,
+        setParkingSpots
       }}
     >
       {children}
