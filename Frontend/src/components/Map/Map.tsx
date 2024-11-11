@@ -62,9 +62,9 @@ const ParkingMap: React.FC<ParkingMapProps> = ({ parkingSpots }) => {
         }
         else if(preciselocation !== null) {
           setTimeout(()=>{map.setView([preciselocation.latitude, preciselocation.longitude], 13)}, 0)
-        }else if(approximateLocation !== null){
-          setTimeout(()=>{map.setView([approximateLocation.latitude, approximateLocation.longitude], 5)}, 0)
-        }
+        }// }else if(approximateLocation !== null){
+        //   setTimeout(()=>{map.setView([approximateLocation.latitude, approximateLocation.longitude], 5)}, 0)
+        // }
       },[preciselocation])
    return null;
   }
