@@ -10,6 +10,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   font-family: "Varela Round", sans-serif;
+  overflow: auto;
 }
 
 .app {
@@ -51,7 +52,7 @@ body {
   box-shadow: 2px 4px 32px rgba(0, 0, 0, 0.542);
   background-clip: padding-box;
   animation: pop 1s;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
 }
 
@@ -136,6 +137,7 @@ body {
   background-clip: padding-box;
   box-sizing: border-box;
   animation: pop 1s;
+  overflow: auto;
 }
 
 .headText {
@@ -279,37 +281,6 @@ body {
   margin-top: 20px;
 }
 
-.messageArea .messageHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* height: 10%; */
-  flex: 10%;
-  background-color: rgba(255, 255, 255, 0.1);
-  box-sizing: border-box;
-  padding: 0 0.5rem;
-}
-
-.messageHeader .conversation {
-  display: inline-flex;
-  flex: 40%;
-  height: max-content;
-  margin: 0;
-}
-
-.messageHeader .conversation:hover {
-  background-color: rgba(255, 255, 255, 0);
-}
-
-.messageArea .messageBox {
-  display: flex;
-  flex: 80%;
-  flex-direction: column;
-  /* height: 80%; */
-  background-color: rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-  box-sizing: border-box;
-}
 
 .addNewfloatBox {
   display: flex;

@@ -10,6 +10,8 @@ import { ParkingSpot } from "../types/ParkingSpot.type";
 
 export const AppContext = createContext<
   | {
+      country: String | null,
+      setCountry: React.Dispatch<SetStateAction<string | null>>
       screenWidth: number;
       setScreenWidth: React.Dispatch<SetStateAction<number>>;
       parkingSpots: ParkingSpot[] | [] | null;
@@ -27,17 +29,23 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-
+  const [ country, setCountry ] = useState<String | null>(null);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[] | [] | null>([]);
 
   useEffect(() => {
     const updateWidth = () => {
       setScreenWidth(window.innerWidth);
-      console.log(screenWidth);
     };
-    updateWidth();
 
+    const getClientCountry = async () => {
+      const response = await fetch("https://api.ipgeolocation.io/ipgeo?apiKey=bdd9c21977ed42b69becc92c9ed8ca63");
+      const data = await response.json();
+      setCountry(data.country_name);
+    }
+
+    updateWidth();
+    getClientCountry();
     window.addEventListener("resize", updateWidth);
 
     return () => {
@@ -48,6 +56,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
+        country,
+        setCountry,
         screenWidth,
         setScreenWidth,
         parkingSpots,
