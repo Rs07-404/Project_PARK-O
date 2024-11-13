@@ -14,6 +14,7 @@ export const signup = async (req, res) =>{
 
         // Check for existing User
         const user = await User.findOne({email});
+        console.log(user)
         if(user){
             return res.status(400).json({error: "user already exists"})
         }
@@ -33,7 +34,6 @@ export const signup = async (req, res) =>{
             password:hashedPassword,
             phone,
             gender,
-            // profilePic: gender === "male" ? boyProfilePic : girlProfilePic
         });
 
         // If user created save user to db
