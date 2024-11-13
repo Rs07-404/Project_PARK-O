@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'; 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,7 +8,7 @@ import redMarkerIcon from '../../assets/icons/red-marker-icon.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import { useAppContext } from '../../context/AppContext.tsx';
-import { useLocationHook } from '../../hooks/getPreciseLocation.tsx';
+import { useLocationHook } from '../../hooks/LocationHooks.tsx';
 
 const DefaultIcon = L.icon({
   iconUrl: markerIcon,
@@ -24,27 +24,11 @@ interface ParkingMapProps {
 }
 
 const ParkingMap: React.FC<ParkingMapProps> = ({ parkingSpots }) => {
-  const [ approximateLocation, setApproximateLocation ] = useState<{latitude: number, longitude: number} | null>(null);
-  const { country, setCountry, preciseLocation, selectedSpot, setSelectedSpot } = useAppContext();
-  const { loading, getPreciseLocation} = useLocationHook();
+  const { preciseLocation, setSelectedSpot, approximateLocation } = useAppContext();
+  const { getPreciseLocation, getApproximateLocation} = useLocationHook();
 
   useEffect(()=>{
-    const setMapApproximateLocation = async() => {
-      try{
-        const response = await fetch(`https://restcountries.com/v3.1/name/${country}`)
-        const data = await response.json();
-        const location = data[0].latlng;
-        console.log(location);
-        setApproximateLocation({latitude:location[0], longitude:location[1]})
-      }catch(e:any){
-        console.log(e.message)
-      }
-    }
-    setMapApproximateLocation();
-  },[country, setCountry])
-
-
-  useEffect(()=>{
+    getApproximateLocation();
     getPreciseLocation();
   },[])
     
