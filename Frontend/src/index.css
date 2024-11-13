@@ -13,6 +13,11 @@ body {
   overflow: auto;
 }
 
+.AppContentbody{
+  height: max-content;
+  width: max-content;
+}
+
 .app {
   display: flex;
   justify-content: center;
@@ -197,6 +202,85 @@ body {
   color: rgb(95, 145, 255);
   text-decoration: underline;
 }
+
+.spot_popup{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: pop 0.2s linear 1;
+}
+
+.spotInfo{
+  display: flex;
+  gap: 2px;
+  flex: 50%;
+}
+
+.spotAction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 50%;
+}
+
+.spotAction .btn{
+  width: 100%;
+}
+
+.reservationBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 92vh;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.reservationForm{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 7px;
+  height: 85vh;
+  width: 100%;
+}
+
+.reservationHeader{
+  display: flex;
+  padding: 2px;
+  width: 100%;
+}
+
+.reservationHeading{
+  justify-content: flex-start;
+  align-items: center;
+  flex: 70%;
+}
+
+.reservationDetails{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.paymentButton{
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  background-color: #000000;
+  color: white;
+}
+
+.reservationHeader .close{
+  flex: 30%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
 
 .btn {
   padding: 0.4rem 0.8rem;

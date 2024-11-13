@@ -16,6 +16,10 @@ export const AppContext = createContext<
       setScreenWidth: React.Dispatch<SetStateAction<number>>;
       parkingSpots: ParkingSpot[] | [] | null;
       setParkingSpots: React.Dispatch<SetStateAction<ParkingSpot[] | [] | null>>;
+      selectedSpot: ParkingSpot | null;
+      setSelectedSpot: React.Dispatch<SetStateAction<ParkingSpot | null>>;
+      preciseLocation: {latitude: number, longitude: number} | null;
+      setPreciseLocation: React.Dispatch<SetStateAction<{latitude: number, longitude: number} | null>>;
     }
   | undefined
 >(undefined);
@@ -29,9 +33,11 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [ country, setCountry ] = useState<String | null>(null);
+  const [ country, setCountry ] = useState<string | null>(null);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[] | [] | null>([]);
+  const [ selectedSpot, setSelectedSpot ] = useState<ParkingSpot | null>(null);
+  const [ preciseLocation, setPreciseLocation ] = useState<{latitude: number, longitude: number} | null>(null);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -61,7 +67,11 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         screenWidth,
         setScreenWidth,
         parkingSpots,
-        setParkingSpots
+        setParkingSpots,
+        selectedSpot,
+        setSelectedSpot,
+        preciseLocation,
+        setPreciseLocation
       }}
     >
       {children}
