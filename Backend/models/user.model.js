@@ -15,6 +15,18 @@ const userSchema = new mongoose.Schema({
         required:true,
         minlength:6
     },
+    roles: {
+        type: [String],
+        enum: ["User","LandOwner","Admin"],
+        default: ["User"],
+        required: true,
+        validate: {
+          validator: function (roles) {
+            return Array.isArray(roles) && new Set(roles).size === roles.length;
+          },
+          message: "Roles must be unique.",
+        },
+    },
     phone:{
         type: String,
         required: true

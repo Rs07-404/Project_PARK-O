@@ -1,9 +1,9 @@
 import { useState } from "react";
 import close_icon from "../../assets/icons/cross.svg";
 import { useAppContext } from "../../context/AppContext";
+import { ParkingSpot } from "../../types/ParkingSpot.type";
 
-const ReservationBox = () => {
-    const { selectedSpot, setSelectedSpot } = useAppContext();
+const ReservationBox: React.FC<{selectedSpot: ParkingSpot, closeModal: ()=>void}> = ({selectedSpot, closeModal}) => {
     const [ rentPerHour, setRentPerHour ] = useState<number>(20)
     const [ finalPrice, setfinalPrice ] = useState<number>(20);
     const handleChange = (e)=>{
@@ -16,7 +16,7 @@ const ReservationBox = () => {
             <div className="reservationForm">
                 <div className="reservationHeader">
                     <div className="reservationHeading">Payment Details for <b>#{selectedSpot?.spotNumber}</b></div>
-                    <div className="close" ><img onClick={()=>{setSelectedSpot(null)}} className="closeButton" src={close_icon} alt="" /></div>
+                    <div className="close" ><img onClick={closeModal} className="closeButton" src={close_icon} alt="" /></div>
                 </div>
                 <div className="reservationDetails">
                     <div className="bookingForm">
