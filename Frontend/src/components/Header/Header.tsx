@@ -3,6 +3,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useLogout } from '../../hooks/LogOutHook';
 import { useEffect, useState } from 'react';
 import Menu from '../Menu/Menu';
+import { Grow } from '@mui/material';
 
 const Header = () => {
     const { authUser } = useAuthContext();
@@ -14,15 +15,15 @@ const Header = () => {
             e.stopImmediatePropagation();
             setShowMenu(false)
         }
-        if(showMenu){
-            document.addEventListener("click",hideMenu)
-        }else{
-            document.removeEventListener("click",hideMenu)
-        }
+        // if(showMenu){
+        //     document.addEventListener("click",hideMenu)
+        // }else{
+        //     document.removeEventListener("click",hideMenu)
+        // }
 
-        return (()=>{
-            document.removeEventListener("click", hideMenu)
-        })
+        // return (()=>{
+        //     document.removeEventListener("click", hideMenu)
+        // })
     },[showMenu])
     return(
         <div className="header">
@@ -36,7 +37,7 @@ const Header = () => {
             </div>
             <div className='logoutButton' onClick={logout}>{loading?"loading":"Logout"}</div>
             </div>
-            { showMenu && <Menu/> }
+            { showMenu && <Grow in={showMenu}><Menu/></Grow> }
         </div>
     )
 }

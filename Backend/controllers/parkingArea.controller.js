@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import ParkingArea from "../models/parkingArea.model";
+import ParkingArea from "../models/parkingArea.model.js";
 
 
 // ============================ CREATE ============================ //
 // Create a ParkingArea
-exports.createParkingArea = async (req, res) => {
+export const createParkingArea = async (req, res) => {
     try {
         const { name, location, boundary, area, parkingSpots } = req.body;
 
@@ -26,7 +26,7 @@ exports.createParkingArea = async (req, res) => {
 
 // ============================ READ ============================ //
 // Get All Parking Areas
-exports.getAllParkingAreas = async (req, res) => {
+export const getAllParkingAreas = async (req, res) => {
     try {
         const parkingAreas = await ParkingArea.find().populate({
             path: 'parkingSpots',
@@ -40,7 +40,7 @@ exports.getAllParkingAreas = async (req, res) => {
 };
 
 // Read a ParkingArea by ID
-exports.getParkingAreaById = async (req, res) => {
+export const getParkingAreaById = async (req, res) => {
     try {
         const { id } = req.params;
         const parkingArea = await ParkingArea.findById(id).populate({
@@ -56,7 +56,7 @@ exports.getParkingAreaById = async (req, res) => {
 };
 
 // Find ParkingAreas within a radius
-exports.findParkingAreasWithinRadius = async (req, res) => {
+export const findParkingAreasWithinRadius = async (req, res) => {
     try {
         const { coordinates, radius } = req.body;
         const parkingAreas = await ParkingArea.find({
@@ -79,7 +79,7 @@ exports.findParkingAreasWithinRadius = async (req, res) => {
 
 // ============================ UPDATE ============================ //
 // Update a ParkingArea by ID
-exports.updateParkingArea = async (req, res) => {
+export const updateParkingArea = async (req, res) => {
     try {
         const { id } = req.params;
         const data = req.body;
@@ -93,7 +93,7 @@ exports.updateParkingArea = async (req, res) => {
 };
 
 // Add a ParkingSpot to a ParkingArea
-exports.addParkingSpotToArea = async (req, res) => {
+export const addParkingSpotToArea = async (req, res) => {
     try {
         const { parkingAreaId, parkingSpotId } = req.body;
         const parkingArea = await ParkingArea.findById(parkingAreaId);
@@ -111,7 +111,7 @@ exports.addParkingSpotToArea = async (req, res) => {
 
 // ============================ DELETE ============================ //
 // Remove a ParkingSpot from a ParkingArea
-exports.removeParkingSpotFromArea = async (req, res) => {
+export const removeParkingSpotFromArea = async (req, res) => {
     try {
         const { parkingAreaId, parkingSpotId } = req.body;
         const parkingArea = await ParkingArea.findById(parkingAreaId);
@@ -127,7 +127,7 @@ exports.removeParkingSpotFromArea = async (req, res) => {
 };
 
 // Delete a ParkingArea by ID
-exports.deleteParkingArea = async (req, res) => {
+export const deleteParkingArea = async (req, res) => {
     try {
         const { id } = req.params;
         const deletedParkingArea = await ParkingArea.findByIdAndDelete(id);

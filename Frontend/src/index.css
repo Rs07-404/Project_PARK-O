@@ -240,6 +240,7 @@ body {
   z-index: 2000;
   background-color: rgba(0, 0, 0, 0.5);
   animation: pop linear 0.2s 1;
+  cursor: default;
 }
 .reservationForm{
   display: flex;
@@ -350,6 +351,7 @@ body {
   flex: 30%;
   justify-content: flex-end;
   align-items: flex-end;
+  cursor: pointer;
 }
 
 

@@ -1,7 +1,8 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
-import signUser from "../utils/tokenWorks.js";
+import {signUser} from "../utils/tokenWorks.js";
 import generateQRCode from "../utils/qrcodeworks.js";
+import jwt from "jsonwebtoken";
 
 export const signup = async (req, res) =>{
     try{
@@ -34,6 +35,7 @@ export const signup = async (req, res) =>{
             password:hashedPassword,
             phone,
             gender,
+            role: ["User"],
         });
 
         // If user created save user to db
@@ -50,6 +52,7 @@ export const signup = async (req, res) =>{
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
+                roles: newUser.roles,
                 qrcode: newUser.qrcode
             });
         }else{
@@ -74,12 +77,13 @@ export const login = async (req, res) =>{
         }
 
         // login the user
-        signUser(user._id, res);
+        signUser(user._id, user.roles, res);
 
         res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
+            roles: user.roles,
             qrcode: user.qrcode
         })
 
@@ -91,10 +95,33 @@ export const login = async (req, res) =>{
 
 export const logout = (req, res) =>{
     try{
-        res.cookie("jwt","",{maxAge:0})
+        res.cookie("user","",{maxAge:0})
         res.status(200).json({message: "Logged out successfully"})
     }catch(error){
         console.log("Error in logout controller", error.message);
         res.status(500).json({error: "Internal Server Error"});
+    }
+}
+
+export const verifyUser = async (req, res) => {
+    try{
+        const cred = req.cookies.user;
+        if(!cred) return res.status(401).json({error: "User Unauthenticated"});
+        const { id, roles } = jwt.verify(cred, process.env.JWT_SECRET);
+        if(!id || !roles) return res.status(401).json({error: "Invalid Credentials"});
+        const user = await User.findById(id);
+        if(!user) return res.status(404).json({error: "User not found"});
+        if (user.roles.includes(...roles)) {return res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            email: user.email,
+            roles: user.roles,
+            qrcode: user.qrcode
+        })} else{
+            res.status(401).json({error: "User not found"});
+        }
+    } catch (error) {
+        console.log("Error in verify user auth controller: ", error);
+        res.status(500).json({error: "Error Verifying User."});
     }
 }
