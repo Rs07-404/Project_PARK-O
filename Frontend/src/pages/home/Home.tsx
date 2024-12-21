@@ -7,7 +7,6 @@ import { useAppContext } from "../../context/AppContext.tsx";
 import useParkingSpot from "../../hooks/ParkingSpotHook.tsx";
 import ReservationBox from "../../components/ReservationForm/ReservationForm.tsx";
 import { useLocationHook } from "../../hooks/LocationHooks.tsx";
-import locationIcon from "../../assets/icons/location.svg";
 
 
 const Home = () => {

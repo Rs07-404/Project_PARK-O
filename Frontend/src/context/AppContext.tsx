@@ -20,6 +20,8 @@ export const AppContext = createContext<
       setPreciseLocation: React.Dispatch<SetStateAction<{latitude: number, longitude: number} | null>>;
       approximateLocation:  {latitude: number, longitude: number} | null;
       setApproximateLocation: React.Dispatch<SetStateAction<{latitude: number, longitude: number} | null>>;
+      showMenu: boolean;
+      setShowMenu: React.Dispatch<SetStateAction<boolean>>;
     }
   | undefined
 >(undefined);
@@ -38,7 +40,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [ selectedSpot, setSelectedSpot ] = useState<ParkingSpot | null>(null);
   const [ preciseLocation, setPreciseLocation ] = useState<{latitude: number, longitude: number} | null>(null);
   const [ approximateLocation, setApproximateLocation ] = useState<{latitude: number, longitude: number} | null>(null);
-
+  const [ showMenu, setShowMenu ] = useState(false);
   useEffect(() => {
     const updateWidth = () => {
       setScreenWidth(window.innerWidth);
@@ -55,6 +57,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
+        showMenu,
+        setShowMenu,
         screenWidth,
         setScreenWidth,
         parkingSpots,
