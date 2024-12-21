@@ -38,7 +38,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [ selectedSpot, setSelectedSpot ] = useState<ParkingSpot | null>(null);
   const [ preciseLocation, setPreciseLocation ] = useState<{latitude: number, longitude: number} | null>(null);
   const [ approximateLocation, setApproximateLocation ] = useState<{latitude: number, longitude: number} | null>(null);
-
   useEffect(() => {
     const updateWidth = () => {
       setScreenWidth(window.innerWidth);
