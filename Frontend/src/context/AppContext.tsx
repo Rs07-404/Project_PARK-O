@@ -10,12 +10,18 @@ import { ParkingSpot } from "../types/ParkingSpot.type";
 
 export const AppContext = createContext<
   | {
-      country: String | null,
-      setCountry: React.Dispatch<SetStateAction<string | null>>
       screenWidth: number;
       setScreenWidth: React.Dispatch<SetStateAction<number>>;
       parkingSpots: ParkingSpot[] | [] | null;
       setParkingSpots: React.Dispatch<SetStateAction<ParkingSpot[] | [] | null>>;
+      selectedSpot: ParkingSpot | null;
+      setSelectedSpot: React.Dispatch<SetStateAction<ParkingSpot | null>>;
+      preciseLocation: {latitude: number, longitude: number} | null;
+      setPreciseLocation: React.Dispatch<SetStateAction<{latitude: number, longitude: number} | null>>;
+      approximateLocation:  {latitude: number, longitude: number} | null;
+      setApproximateLocation: React.Dispatch<SetStateAction<{latitude: number, longitude: number} | null>>;
+      showMenu: boolean;
+      setShowMenu: React.Dispatch<SetStateAction<boolean>>;
     }
   | undefined
 >(undefined);
@@ -29,23 +35,18 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const [ country, setCountry ] = useState<String | null>(null);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[] | [] | null>([]);
-
+  const [ selectedSpot, setSelectedSpot ] = useState<ParkingSpot | null>(null);
+  const [ preciseLocation, setPreciseLocation ] = useState<{latitude: number, longitude: number} | null>(null);
+  const [ approximateLocation, setApproximateLocation ] = useState<{latitude: number, longitude: number} | null>(null);
+  const [ showMenu, setShowMenu ] = useState(false);
   useEffect(() => {
     const updateWidth = () => {
       setScreenWidth(window.innerWidth);
     };
 
-    const getClientCountry = async () => {
-      const response = await fetch("https://api.ipgeolocation.io/ipgeo?apiKey=bdd9c21977ed42b69becc92c9ed8ca63");
-      const data = await response.json();
-      setCountry(data.country_name);
-    }
-
     updateWidth();
-    getClientCountry();
     window.addEventListener("resize", updateWidth);
 
     return () => {
@@ -56,12 +57,18 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
-        country,
-        setCountry,
+        showMenu,
+        setShowMenu,
         screenWidth,
         setScreenWidth,
         parkingSpots,
-        setParkingSpots
+        setParkingSpots,
+        selectedSpot,
+        setSelectedSpot,
+        preciseLocation,
+        setPreciseLocation,
+        approximateLocation,
+        setApproximateLocation
       }}
     >
       {children}
