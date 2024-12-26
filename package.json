@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon backend/server.js",
     "build": "cd frontend",
-    "dev": "cd frontend && npm run dev"
+    "dev": "cd frontend && npm run dev",
+    "start": "node backend/server.js"
   },
   "type": "module",
   "repository": {
