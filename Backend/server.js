@@ -8,11 +8,14 @@ import reservationRoutes from "./routes/reservations.route.js";
 import vehicleRoutes from "./routes/vehicle.route.js";
 import parkingSportRoutes from "./routes/parkingSpot.route.js";
 import parkingAreaRotues from "./routes/parkingArea.route.js";
+import cors from "cors";
+
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

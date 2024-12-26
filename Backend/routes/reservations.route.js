@@ -5,6 +5,6 @@ import authoriseUser from "../middlewares/authoriseUser.js";
 const router = express.Router();
 
 router.post('/create', authoriseUser, createReservation);
-router.post('/verifyVehicle', checkReservation);
+router.post('/verifyreservation', checkReservation);
 
 export default router;
