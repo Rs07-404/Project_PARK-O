@@ -3,21 +3,24 @@ import User from "../models/user.model.js";
 
 const authoriseUser = async (req, res, next) => {
     try {
-        const token = req.cookies.jwt;
+        const token = req.cookies.user;
         if(!token){
             return res.status(401).json({ error: "Unauthorized - No Token Provided" });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const { id, roles } = jwt.verify(token, process.env.JWT_SECRET);
 
-        if(!decoded){
+        if(!id, !roles){
             return res.status(401).json({ error: "Unauthorized - Invalid Token" });
         }
 
-        const user = await User.findById(decoded.userId).select("-password")
+        const user = await User.findById(id).select("-password")
         
         if(!user){
             return res.status(404).json({ error: "User not found" });
+        }
+        if(!user.roles.includes("User")){
+            return res.status(401).json({ error: "Unauthorized Acess" });
         }
 
         req.user = user;
