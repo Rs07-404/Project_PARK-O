@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     },
     vehicles:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vwhicle',
+        ref: 'Vehicle',
         default: [],
     }],
     reservations: [{

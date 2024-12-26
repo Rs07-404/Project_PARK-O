@@ -15,17 +15,19 @@ export const useAuthContext = () => {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthContextProvider = ({ children }) => {
-    const storedUser = localStorage.getItem("user");
-    const [authUser, setAuthUser] = useState<User |  null>(storedUser ? JSON.parse(storedUser) : null);
+    const [authUser, setAuthUser] = useState<User |  null>(null);
 
     useEffect(()=>{
         const verify = async () => {
             try{
                 const response = await fetch('/api/auth/verifylogin');
                 const user = await response.json();
-                setAuthUser(user);
+                if(user.error){
+                    setAuthUser(null);
+                }else{
+                    setAuthUser(user);
+                }
             } catch (error){
-                toast.error("Login to Access")
             }
         }
 
