@@ -8,7 +8,7 @@ export default defineConfig({
     // port: 3000,
     proxy: {
         '/api':{
-            target: 'https://project-park-o.onrender.com'
+            target: 'https://parko-user-frontend.onrender.com'
         },
     },
   },
