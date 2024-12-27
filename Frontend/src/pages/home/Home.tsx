@@ -5,7 +5,6 @@ import { useAppContext } from "../../context/AppContext.tsx";
 // import { useAuthContext } from "../../context/AuthContext.tsx";
 // import { ParkingSpot } from "../../types/ParkingSpot.type.ts";
 import useParkingSpot from "../../hooks/ParkingSpotHook.tsx";
-import ReservationBox from "../../components/ReservationForm/ReservationForm.tsx";
 import { useLocationHook } from "../../hooks/LocationHooks.tsx";
 
 

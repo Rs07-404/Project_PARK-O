@@ -1,4 +1,3 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
 import QRCode from "../QRCode/QRCode";
 import "./Menu.css";
 import { Box } from "@mui/material";

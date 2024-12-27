@@ -33,7 +33,7 @@ const Header = () => {
             </div>
             <div className="profile">
             <div onClick={()=>{setShowMenu(!showMenu)}}>
-                <Avatar alt={authUser? authUser.fullName:"NA"}  src="/static/images/avatar/1.jpg" />
+                <Avatar alt={authUser? authUser.fullName.toString():"NA"}  src="/static/images/avatar/1.jpg" />
             </div>
             <div className='logoutButton' onClick={logout}>{loading?"loading":"Logout"}</div>
             </div>

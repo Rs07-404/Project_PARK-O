@@ -1,11 +1,10 @@
 import { useState } from "react";
 import close_icon from "../../assets/icons/cross.svg";
-import { useAppContext } from "../../context/AppContext";
 import { ParkingSpot } from "../../types/ParkingSpot.type";
 import toast from "react-hot-toast";
 
 const ReservationBox: React.FC<{selectedSpot: ParkingSpot, closeModal: ()=>void}> = ({selectedSpot, closeModal}) => {
-    const [ rentPerHour, setRentPerHour ] = useState<number>(20)
+    const [ rentPerHour ] = useState<number>(20)
     const [ finalPrice, setfinalPrice ] = useState<number>(20);
     const [ time, setTime ] = useState<number>(1);
     const handleChange = (e)=>{

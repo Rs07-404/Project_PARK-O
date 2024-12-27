@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../types/User.type.ts";
 import { AuthContextType } from "../types/AuthContext.type.ts";
-import toast from "react-hot-toast";
 
 
 export const useAuthContext = () => {
