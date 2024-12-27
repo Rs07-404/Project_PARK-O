@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectToMongoDB from "./db/connectdb.js";
-
+import path from "path";
 import authRoutes from "./routes/auth.route.js";
 import reservationRoutes from "./routes/reservations.route.js";
 import vehicleRoutes from "./routes/vehicle.route.js";
@@ -25,7 +25,13 @@ app.use("/api/vehicle", vehicleRoutes);
 app.use("/api/parkingSpot", parkingSportRoutes);
 app.use("/api/parkingArea", parkingAreaRotues);
 
-import crypto from 'crypto';
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res)=>{
+    res.sendFile(path.join(__dirname,"frontend/dist/index.html"));
+});
+
 app.listen(PORT, async() => {
     await connectToMongoDB();
     console.log(`Server running on port ${PORT}`);
