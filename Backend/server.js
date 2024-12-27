@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectToMongoDB from "./db/connectdb.js";
 import path from "path";
+import { fileURLToPath } from "url";
+
 import authRoutes from "./routes/auth.route.js";
 import reservationRoutes from "./routes/reservations.route.js";
 import vehicleRoutes from "./routes/vehicle.route.js";
@@ -25,11 +27,14 @@ app.use("/api/vehicle", vehicleRoutes);
 app.use("/api/parkingSpot", parkingSportRoutes);
 app.use("/api/parkingArea", parkingAreaRotues);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-app.get("*", (req, res)=>{
-    res.sendFile(path.join(__dirname,"frontend/dist/index.html"));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 app.listen(PORT, async() => {
